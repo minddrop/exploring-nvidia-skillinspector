@@ -47,7 +47,7 @@ We tested SkillSpector against two distinct targets:
 - SkillSpector's static analysis is framework-agnostic. It correctly identified `subprocess.run(shell=True)` and unvalidated output injection within a LangChain `@tool` function, proving its utility across the wider agentic ecosystem.
 
 ### Stage 2 Configuration and Custom Rules
-- **LLM Configuration:** Demonstrated that limitations can be bypassed by configuring SkillSpector to use any OpenAI-compatible inference endpoint (e.g., Ollama or vLLM) by setting `SKILLSPECTOR_PROVIDER=openai`, `OPENAI_BASE_URL`, and `OPENAI_API_KEY`.
+- **LLM Configuration:** Not fully evaluated yet. We currently lack a compatible LLM endpoint (such as an active OpenAI/Anthropic key or a local Ollama/vLLM instance) to properly test the semantic evaluation feature, so this remains a future investigation task.
 - **Custom Rules Support:** Custom YARA rules can be easily injected using the `--yara-rules-dir` CLI argument. Custom AST behavioral rules and LLM semantic evaluation prompts are currently hardcoded inside `src/skillspector/nodes/analyzers/` and require modifying the Python source code directly.
 
 ### CI/CD Integration
@@ -61,7 +61,7 @@ Even without the LLM Semantic Evaluation stage, its static analysis engine is in
 **Recommendation:** Highly recommended for integration into CI/CD pipelines when dealing with third-party AI skills or MCP servers.
 
 ## 5. Next Steps / Further Investigation (Checklist)
-- [x] **Test Stage 2 (LLM Evaluation):** Resolve the Gemini API wrapper limitations or configure an alternative LLM provider to fully evaluate the semantic evaluation stage.
+- [ ] **Test Stage 2 (LLM Evaluation):** Resolve the Gemini API wrapper limitations or configure an alternative LLM provider to fully evaluate the semantic evaluation stage.
 - [x] **CI/CD Integration:** Set up a proof-of-concept pipeline (e.g., GitHub Actions) to automatically run SkillSpector on incoming pull requests for AI skills.
 - [x] **False Positive Analysis:** Run SkillSpector against a broader dataset of safe, production-grade skills to assess the false positive rate of the static analysis engine.
 - [x] **Custom Rule Creation:** Investigate how to add custom static analysis rules or custom semantic evaluation prompts to SkillSpector.
