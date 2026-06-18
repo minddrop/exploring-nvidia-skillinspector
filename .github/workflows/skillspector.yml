@@ -21,14 +21,13 @@ jobs:
 
       - name: Install SkillSpector
         run: |
-          # Assuming skillspector is either in the repo or available via pip/git
-          # For this workspace, we navigate to the skillspector folder.
+          # Clone the official SkillSpector repository
+          git clone https://github.com/NVIDIA/skillspector.git
           cd skillspector
           uv sync
 
       - name: Run SkillSpector Static Analysis
         run: |
           cd skillspector
-          # Run with --no-llm to avoid needing API keys in PR checks
-          # Or provide SECRETS.OPENAI_API_KEY for full semantic evaluation
-          uv run skillspector scan ../test_skill --no-llm
+          # Scan the current repository via its GitHub URL
+          uv run skillspector scan https://github.com/${{ github.repository }} --no-llm
