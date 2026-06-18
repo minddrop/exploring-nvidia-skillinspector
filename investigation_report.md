@@ -62,7 +62,3 @@ Even without the LLM Semantic Evaluation stage, its static analysis engine is in
 
 ## 5. Next Steps / Further Investigation (Checklist)
 - [ ] **Test Stage 2 (LLM Evaluation):** Resolve the Gemini API wrapper limitations or configure an alternative LLM provider to fully evaluate the semantic evaluation stage.
-- [x] **CI/CD Integration:** Set up a proof-of-concept pipeline (e.g., GitHub Actions) to automatically run SkillSpector on incoming pull requests for AI skills.
-- [x] **False Positive Analysis:** Run SkillSpector against a broader dataset of safe, production-grade skills to assess the false positive rate of the static analysis engine.
-- [x] **Custom Rule Creation:** Investigate how to add custom static analysis rules or custom semantic evaluation prompts to SkillSpector.
-- [x] **Broader Ecosystem Testing:** Expand testing to include skills from other popular frameworks like LangChain, LlamaIndex, or AutoGen.
