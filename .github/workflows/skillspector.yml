@@ -1,0 +1,34 @@
+name: SkillSpector Security Scan
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  skillspector_scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Setup Python
+        run: uv python install 3.12
+
+      - name: Install SkillSpector
+        run: |
+          # Assuming skillspector is either in the repo or available via pip/git
+          # For this workspace, we navigate to the skillspector folder.
+          cd skillspector
+          uv sync
+
+      - name: Run SkillSpector Static Analysis
+        run: |
+          cd skillspector
+          # Run with --no-llm to avoid needing API keys in PR checks
+          # Or provide SECRETS.OPENAI_API_KEY for full semantic evaluation
+          uv run skillspector scan ../test_skill --no-llm
